@@ -6,7 +6,7 @@ class treeNode:
 		self.right = right
 		self.val = val
 
-def preorder(root):
+def preorderIterative(root):
 	if not root:
 		return []
 	ret = []
@@ -20,8 +20,13 @@ def preorder(root):
 			stk.append(cur.left)
 	return ret
 
+def preorderRecursive(root):
+	if not root:
+		return []
+	return [root.val] + preorderRecursive(root.left) + preorderRecursive(root.right)
 
-def inorder(root):
+
+def inorderIterative(root):
 	if not root:
 		return []
 	ret = []
@@ -42,7 +47,12 @@ def inorder(root):
 	return ret
 
 
-def postorder(root):
+def inorderRecursive(root):
+	if not root:
+		return []
+	return inorderRecursive(root.left) + [root.val] + inorderRecursive(root.right)
+
+def postorderIterative(root):
 	if not root:
 		return []
 	ret = []
@@ -60,6 +70,11 @@ def postorder(root):
 		else:
 			ret.append(cur.val)
 	return ret
+
+def postorderRecursive(root):
+	if not root:
+		return []
+	return postorderRecursive(root.left) + postorderRecursive(root.right) + [root.val] 
 
 def levelorder(root):
 	if not root:
@@ -90,9 +105,19 @@ def main():
 	root.right.left = treeNode(9)
 	root.right.right = treeNode(20)
 	
-	print(preorder(root))
-	print(inorder(root))
-	print(postorder(root))
+	print("Preorder Traversal:")
+	print(preorderIterative(root))
+	print(preorderRecursive(root))
+
+	print("Inorder Traversal:")
+	print(inorderIterative(root))
+	print(inorderRecursive(root))
+
+	print("Postorder Traversal:")
+	print(postorderIterative(root))
+	print(postorderRecursive(root))
+
+	print("Levelorder Traversal:")
 	print(levelorder(root))
 
 
